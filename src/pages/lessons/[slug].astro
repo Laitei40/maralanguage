@@ -1,0 +1,16 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+import { getCollection } from 'astro:content';
+
+const { slug } = Astro.params;
+const entry = (await getCollection('lessons')).find((lesson) => lesson.slug === slug);
+
+if (!entry) {
+  throw new Error(`Lesson not found for slug: ${slug}`);
+}
+
+const { Content } = await entry.render();
+---
+<LessonLayout frontmatter={entry.data}>
+  <Content />
+</LessonLayout>

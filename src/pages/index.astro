@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const lessons = await getCollection('lessons');
+const sorted = lessons.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).slice(0, 3);
+---
+<BaseLayout title="Mara Language Learner" description="Learn Mara step by step with concise, file-based lessons.">
+  <section class="mb-10 grid gap-8 lg:grid-cols-[1.2fr,0.8fr] items-center">
+    <div class="space-y-6">
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Content-first · Fast · Offline-friendly</p>
+      <h1 class="text-4xl sm:text-5xl font-bold leading-tight text-white">
+        Learn the Mara language with concise, guided lessons.
+      </h1>
+      <p class="text-lg text-slate-300 max-w-3xl">
+        A W3Schools-inspired explorer for Mara grammar, sounds, and vocabulary. All content is Markdown-backed so you can
+        version, review, and extend it easily.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a
+          href="/lessons"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-brand-primary text-white font-semibold shadow-card hover:-translate-y-[1px] transition"
+        >
+          Start learning
+        </a>
+        <a
+          href="/about"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-slate-700 text-slate-100 hover:bg-slate-800/60"
+        >
+          About Mara
+        </a>
+      </div>
+    </div>
+    <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/60 shadow-card">
+      <p class="text-sm text-slate-400 mb-2">How it works</p>
+      <ul class="space-y-3 text-sm text-slate-200">
+        <li>📦 Markdown-first: lessons live in <span class="font-semibold">src/content/lessons</span>.</li>
+        <li>⚡ Astro + Tailwind: fast static delivery for Cloudflare Pages.</li>
+        <li>🔍 SEO-ready: semantic HTML, clean head tags, quick loads.</li>
+        <li>📱 Responsive: sidebar navigation with mobile toggle.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-semibold">Featured lessons</h2>
+      <a class="text-sm text-brand-primary hover:text-amber-300" href="/lessons">See all lessons →</a>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {sorted.map(({ slug, data }) => (
+        <a
+          href={`/lessons/${slug}`}
+          class="block rounded-xl border border-slate-800 bg-slate-900/60 p-5 hover:border-brand-primary/60 hover:-translate-y-[2px] transition shadow-card"
+        >
+          <div class="flex items-center justify-between mb-2 text-xs text-slate-400">
+            <span class="font-semibold uppercase tracking-wide">{data.level}</span>
+            <span>Lesson {data.order}</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white">{data.title}</h3>
+          <p class="text-sm text-slate-300 mt-2">{data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

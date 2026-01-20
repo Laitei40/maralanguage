@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { frontmatter, children } = Astro.props;
+const { title, level, description, order } = frontmatter;
+---
+<BaseLayout title={`${title} · Mara Language`} description={description}>
+  <div class="flex items-center gap-3 mb-6">
+    <span class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-brand-primary/20 text-brand-primary uppercase tracking-wide">{level}</span>
+    <span class="text-sm text-slate-400">Lesson {order}</span>
+  </div>
+
+  <article class="prose prose-invert prose-headings:text-white prose-strong:text-white prose-a:text-brand-primary">
+    <h1 class="text-3xl font-bold mb-4">{title}</h1>
+    <p class="text-slate-300 text-lg mb-6">{description}</p>
+    <slot />
+  </article>
+</BaseLayout>

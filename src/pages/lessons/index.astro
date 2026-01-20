@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allLessons = await getCollection('lessons');
+
+// Group lessons by Phase -> Module
+const grouped = allLessons.reduce((acc, lesson) => {
+  const phase = lesson.data.phase;
+  const module = lesson.data.module;
+
+  if (!acc[phase]) acc[phase] = {};
+  if (!acc[phase][module]) acc[phase][module] = [];
+
+  acc[phase][module].push(lesson);
+  return acc;
+}, {} as Record<string, Record<string, typeof allLessons>>);
+
+// Sort phases and modules if needed (using default alphabetical or specific logic)
+const phases = Object.keys(grouped).sort(); // "Phase I" comes before "Phase II" naturally
+---
+<BaseLayout title="Lessons · Mara Language" description="Browse Mara lessons by level and order.">
+  <header class="mb-10">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Curriculum</p>
+        <h1 class="text-3xl font-bold text-white mt-2">Lesson Index</h1>
+      </div>
+      <a href="/curriculum" class="text-sm font-semibold text-brand-primary hover:text-white transition">
+        View Full Roadmap →
+      </a>
+    </div>
+    <p class="text-slate-300 mt-3 max-w-3xl">
+      Follow the phases to master the language found in our <a href="/curriculum" class="underline decoration-slate-600 hover:decoration-brand-primary">comprehensive curriculum</a>.
+    </p>
+  </header>
+
+  <div class="space-y-12">
+    {phases.map((phase) => (
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-6 border-b border-slate-800 pb-2">{phase}</h2>
+        <div class="space-y-8">
+          {Object.keys(grouped[phase]).sort().map((module) => (
+            <div class="bg-slate-900/30 rounded-2xl p-6 border border-slate-800/50">
+              <h3 class="text-xl font-semibold text-brand-light mb-4 flex items-center gap-3">
+                <span class="bg-brand-primary/20 text-brand-primary text-xs px-2 py-1 rounded uppercase tracking-wider">Module</span>
+                {module.replace(/^Module \d+: /, '')}
+              </h3>
+
+              <div class="grid gap-4 md:grid-cols-2">
+                {grouped[phase][module]
+                  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+                  .map(({ slug, data }) => (
+                  <a
+                    href={`/lessons/${slug}`}
+                    class="group relative block rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-brand-primary/50 hover:bg-slate-800 transition shadow-sm"
+                  >
+                    <div class="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition text-brand-primary">→</div>
+                    <div class="flex items-center gap-2 text-xs text-slate-400 mb-2">
+                      <span class="font-mono text-brand-primary/80">#{data.order}</span>
+                      <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+                      <span class="uppercase tracking-wide text-[10px]">{data.level}</span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-white group-hover:text-brand-light transition">{data.title}</h4>
+                    <p class="text-sm text-slate-400 mt-2 line-clamp-2">{data.description}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

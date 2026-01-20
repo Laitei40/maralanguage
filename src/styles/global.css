@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0b1c2c;
+  --surface: #0f172a;
+  --panel: #13223a;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --brand: #0f766e;
+  --accent: #f59e0b;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Work Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 15% 20%, rgba(15, 118, 110, 0.09), transparent 25%),
+    radial-gradient(circle at 80% 10%, rgba(245, 158, 11, 0.1), transparent 25%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fbbf24;
+}
+
+p {
+  color: var(--text);
+  line-height: 1.7;
+}
+
+main {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #f8fafc;
+  margin: 0;
+}
+
+prose h1,
+prose h2,
+prose h3 {
+  font-weight: 700;
+}
+
+blockquote {
+  border-left: 4px solid var(--brand);
+  padding-left: 1rem;
+  margin: 1.25rem 0;
+  color: var(--muted);
+}
+
+code {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  background: rgba(15, 118, 110, 0.1);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+pre {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 1rem;
+  overflow: auto;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+.prose {
+  max-width: 72ch;
+}
+
+.table-card {
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 1rem;
+  background: rgba(19, 34, 58, 0.75);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About · Mara Language Learner" description="About the Mara language and this learning site.">
+  <section class="space-y-6">
+    <h1 class="text-3xl font-bold text-white">About the Mara language</h1>
+    <p class="text-lg text-slate-300 max-w-4xl">
+      Mara is spoken by the Mara people of southeastern Mizoram (India) and parts of Myanmar. This site helps learners
+      explore pronunciation, grammar, and common expressions through concise, file-based lessons.
+    </p>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/60 shadow-card">
+        <h2 class="text-xl font-semibold mb-2">What you get</h2>
+        <ul class="list-disc list-inside text-slate-300 space-y-2">
+          <li>Curated lesson path from beginner to advanced.</li>
+          <li>Native Mara characters (â, ô, ch) rendered correctly.</li>
+          <li>Audio-friendly structure you can extend later with media.</li>
+        </ul>
+      </div>
+      <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/60 shadow-card">
+        <h2 class="text-xl font-semibold mb-2">Built for maintainers</h2>
+        <ul class="list-disc list-inside text-slate-300 space-y-2">
+          <li>Markdown/MDX content stored in <span class="font-semibold">src/content/lessons</span>.</li>
+          <li>Astro + Cloudflare Pages for fast static delivery.</li>
+          <li>Simple CSS/Tailwind styling, minimal JavaScript.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-slate-300 max-w-4xl">
+      Phase 1 is intentionally simple: no databases, no auth. When you are ready for Phase 2, plug in Cloudflare D1 for
+      dynamic progress tracking and R2 for audio assets without restructuring the core pages.
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const curriculum = [
+  {
+    title: "Phase I: The Foundation (Beginner)",
+    description: "Goal: Basic literacy, pronunciation, and survival conversation. Target Audience: Non-native speakers, children, or diaspora members with no prior knowledge.",
+    modules: [
+      {
+        title: "Module 1: Introduction & Phonics",
+        topics: [
+          "The Mara Alphabet (A, AW, B, CH, D...)",
+          "Distinction between vowels (A, AW, E, I, O, U, Y) and diphthongs",
+          "The 'Glottal Stop' (Hry-pathlu) and how it changes meaning",
+          "Consonant clusters (TL, HNG, HR)",
+          "Pronunciation Drills & Tone differences",
+          "Reading practice: Simple monosyllabic words"
+        ]
+      },
+      {
+        title: "Module 2: Survival Mara",
+        topics: [
+          "Greetings & Etiquette ('Na hro?', Honorifics)",
+          "Essential Vocabulary: Numbers 1-100, Family members (Paw, Naw), Colors, Common Objects",
+          "Basic Sentence Structure: Subject-Object-Verb (SOV)",
+          "Simple commands ('Vua' - Go, 'Atly' - Run)"
+        ]
+      },
+      {
+        title: "Module 3: Everyday Life",
+        topics: [
+          "Topics: Market, Kitchen, Weather, Time/Days of the week",
+          "Basic pronouns (Kei, Nâ, Anie)",
+          "Simple Tenses: Present (lâ), Past, and Future (aw)",
+          "Yes/No questions"
+        ]
+      }
+    ]
+  },
+  {
+    title: "Phase II: Functional Fluency (Intermediate)",
+    description: "Goal: Comfortable conversation, understanding folklore, and basic writing. Target Audience: Heritage speakers or those who have completed Phase I.",
+    modules: [
+      {
+        title: "Module 4: Grammar Deep Dive",
+        topics: [
+          "Complex Sentence Structures & Conjunctions",
+          "Negation (Vah, Lei)",
+          "Pluralization and classifiers",
+          "Postpositions ('O chhôh liata')"
+        ]
+      },
+      {
+        title: "Module 5: Narrative & Reading",
+        topics: [
+          "Reading Material: Simple Mara stories and folk tales",
+          "MADC area signs and notices",
+          "Listening Comprehension: Broadcasts or sermons",
+          "Longer conversations"
+        ]
+      },
+      {
+        title: "Module 6: Cultural Context",
+        topics: [
+          "Geography: Villages in Mizoram vs. Myanmar",
+          "Cultural festivals: Lyiva Khutla",
+          "Kinship terms and social hierarchy in the Tlosai dialect"
+        ]
+      }
+    ]
+  },
+  {
+    title: "Phase III: Proficiency (Advanced)",
+    description: "Goal: Professional communication, literary analysis, and rhetoric. Target Audience: University students, translators, and community leaders.",
+    modules: [
+      {
+        title: "Module 7: Advanced Rhetoric & Composition",
+        topics: [
+          "Formal Speaking (Bie reih)",
+          "Proverbs and idioms (Pakhaw bie)",
+          "Essay writing in Tlosai",
+          "Translation skills"
+        ]
+      },
+      {
+        title: "Module 8: Literature & Theology",
+        topics: [
+          "Study of the Mara Bible",
+          "Hymnology: Analyzing old and new Mara songs",
+          "Modern Mara literature"
+        ]
+      },
+      {
+        title: "Module 9: Dialectal Variation",
+        topics: [
+          "Comparative Study: Tlosai vs. Zyhno, Hlaipao, Vahapi",
+          "Code-switching between Mara, Mizo, and English"
+        ]
+      }
+    ]
+  },
+  {
+    title: "Phase IV: Mastery (Research/University Level)",
+    description: "Goal: Academic contribution, linguistics preservation, and historical documentation. Target Audience: Linguists, Researchers, Historians.",
+    modules: [
+      {
+        title: "Module 10: Linguistics & Etymology",
+        topics: [
+          "Historical Linguistics: Kuki-Chin roots",
+          "Evolution of spelling systems",
+          "Tonal Analysis & Scientific transcription (IPA)",
+          "Morphology"
+        ]
+      },
+      {
+        title: "Module 11: Oral History & Documentation",
+        topics: [
+          "Fieldwork Methodology",
+          "Recording and transcribing oral traditions (Hla do)",
+          "Digital preservation"
+        ]
+      },
+      {
+        title: "Module 12: Thesis/Project",
+        topics: [
+          "Capstone Project: Research paper, dictionary, or translation"
+        ]
+      }
+    ]
+  }
+];
+---
+<BaseLayout title="Curriculum & Roadmap · Mara Language" description="The complete path from beginner to mastery.">
+  <div class="max-w-4xl mx-auto">
+    <header class="mb-10 border-b border-slate-800 pb-8">
+      <p class="text-xs uppercase tracking-[0.3em] text-brand-primary mb-2">Roadmap</p>
+      <h1 class="text-4xl font-bold text-white mb-4">Mara Language Curriculum</h1>
+      <p class="text-xl text-slate-300">
+        A structured path from basic survival phrases to academic mastery of the Tlosai dialect.
+      </p>
+    </header>
+
+    <div class="space-y-16">
+      {curriculum.map((phase, index) => (
+        <section class="relative pl-8 border-l-2 border-slate-800">
+          <div class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-brand-primary border-4 border-[#0b1c2c]"></div>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-2">{phase.title}</h2>
+            <p class="text-slate-400 text-lg">{phase.description}</p>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {phase.modules.map((module) => (
+              <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                <h3 class="text-lg font-semibold text-brand-light mb-3">{module.title}</h3>
+                <ul class="space-y-2">
+                  {module.topics.map((topic) => (
+                    <li class="flex items-start gap-2 text-sm text-slate-300">
+                      <span class="text-brand-accent mt-1.5 h-1 w-1 rounded-full bg-current shrink-0"></span>
+                      <span>{topic}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <div class="mt-16 p-8 rounded-2xl bg-gradient-to-r from-brand-primary/10 to-brand-accent/5 border border-brand-primary/20 text-center">
+      <h3 class="text-2xl font-bold text-white mb-3">Ready to start?</h3>
+      <p class="text-slate-300 mb-6">Begin with Phase I and build your foundation today.</p>
+      <a
+        href="/lessons"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-primary text-white font-semibold shadow-lg hover:-translate-y-1 transition"
+      >
+        Go to Lessons
+      </a>
+    </div>
+  </div>
+</BaseLayout>
