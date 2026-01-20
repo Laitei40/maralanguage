@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg: #0b1c2c;
-  --surface: #0f172a;
-  --panel: #13223a;
-  --text: #e2e8f0;
-  --muted: #94a3b8;
-  --brand: #0f766e;
+  --bg: #050b14;
+  --surface: #0b1222;
+  --panel: rgba(17, 24, 39, 0.72);
+  --panel-strong: rgba(17, 24, 39, 0.9);
+  --text: #e7ecf5;
+  --muted: #9fb0c8;
+  --brand: #16c8c1;
+  --brand-strong: #0ea5e9;
   --accent: #f59e0b;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 * {
@@ -18,20 +20,30 @@
 body {
   margin: 0;
   font-family: 'Work Sans', 'Inter', system-ui, -apple-system, sans-serif;
-  background: radial-gradient(circle at 15% 20%, rgba(15, 118, 110, 0.09), transparent 25%),
-    radial-gradient(circle at 80% 10%, rgba(245, 158, 11, 0.1), transparent 25%),
+  background:
+    radial-gradient(circle at 15% 20%, rgba(22, 200, 193, 0.12), transparent 32%),
+    radial-gradient(circle at 85% 10%, rgba(14, 165, 233, 0.12), transparent 32%),
+    radial-gradient(circle at 50% 80%, rgba(245, 158, 11, 0.12), transparent 35%),
     var(--bg);
   color: var(--text);
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 a {
-  color: var(--accent);
+  color: var(--brand-strong);
   text-decoration: none;
+  transition: color 180ms ease, text-shadow 180ms ease;
 }
 
 a:hover {
   color: #fbbf24;
+  text-shadow: 0 4px 18px rgba(245, 158, 11, 0.28);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--brand-strong);
+  outline-offset: 2px;
 }
 
 p {
@@ -66,18 +78,19 @@ blockquote {
 
 code {
   font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-  background: rgba(15, 118, 110, 0.1);
-  border-radius: 6px;
-  padding: 2px 6px;
+  background: rgba(14, 165, 233, 0.12);
+  border-radius: 8px;
+  padding: 2px 8px;
+  border: 1px solid rgba(14, 165, 233, 0.2);
 }
 
 pre {
-  background: #0f172a;
+  background: #0b162b;
   border: 1px solid #1e293b;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1rem;
   overflow: auto;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 60px rgba(5, 12, 26, 0.45);
 }
 
 .prose {
@@ -86,8 +99,31 @@ pre {
 
 .table-card {
   border: 1px solid #1e293b;
-  border-radius: 12px;
-  padding: 1rem;
-  background: rgba(19, 34, 58, 0.75);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, rgba(17, 24, 39, 0.75), rgba(15, 23, 42, 0.92));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.glass-panel {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+}
+
+.soft-fade-in {
+  animation: fadeInUp 320ms ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

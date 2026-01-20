@@ -1,12 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import cloudflare from '@astrojs/cloudflare';
 
-// Astro configuration targeting Cloudflare Pages
+// Astro configuration for static site deployment on Cloudflare Pages
 export default defineConfig({
   site: 'https://maralearning.pages.dev',
   output: 'static',
-  adapter: cloudflare(),
   integrations: [
     tailwind({
       applyBaseStyles: false
