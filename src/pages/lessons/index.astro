@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import LessonCard from '../../components/LessonCard.astro';
 
 const allLessons = await getCollection('lessons');
 
@@ -41,7 +42,7 @@ const phases = Object.keys(grouped).sort(); // "Phase I" comes before "Phase II"
         <h2 class="text-2xl font-bold text-white mb-6 border-b border-slate-800 pb-2">{phase}</h2>
         <div class="space-y-8">
           {Object.keys(grouped[phase]).sort().map((module) => (
-            <div class="bg-slate-900/30 rounded-2xl p-6 border border-slate-800/50">
+            <div class="bg-slate-900/30 rounded-2xl p-6 border border-slate-800/50 glass-panel">
               <h3 class="text-xl font-semibold text-brand-light mb-4 flex items-center gap-3">
                 <span class="bg-brand-primary/20 text-brand-primary text-xs px-2 py-1 rounded uppercase tracking-wider">Module</span>
                 {module.replace(/^Module \d+: /, '')}
@@ -51,20 +52,8 @@ const phases = Object.keys(grouped).sort(); // "Phase I" comes before "Phase II"
                 {grouped[phase][module]
                   .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
                   .map(({ slug, data }) => (
-                  <a
-                    href={`/lessons/${slug}`}
-                    class="group relative block rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-brand-primary/50 hover:bg-slate-800 transition shadow-sm"
-                  >
-                    <div class="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition text-brand-primary">→</div>
-                    <div class="flex items-center gap-2 text-xs text-slate-400 mb-2">
-                      <span class="font-mono text-brand-primary/80">#{data.order}</span>
-                      <span class="w-1 h-1 rounded-full bg-slate-600"></span>
-                      <span class="uppercase tracking-wide text-[10px]">{data.level}</span>
-                    </div>
-                    <h4 class="text-lg font-semibold text-white group-hover:text-brand-light transition">{data.title}</h4>
-                    <p class="text-sm text-slate-400 mt-2 line-clamp-2">{data.description}</p>
-                  </a>
-                ))}
+                    <LessonCard slug={slug} data={data} />
+                  ))}
               </div>
             </div>
           ))}

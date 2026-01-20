@@ -1,0 +1,16 @@
+---
+const { slug, data } = Astro.props;
+---
+<a
+  href={`/lessons/${slug}`}
+  class="group relative block rounded-xl border border-slate-800/70 bg-slate-900/70 p-5 lift-card overflow-hidden"
+>
+  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-200 bg-gradient-to-br from-brand-primary/10 via-transparent to-brand-strong/10"></div>
+  <div class="relative flex items-center gap-2 text-xs text-slate-400 mb-2">
+    <span class="font-mono text-brand-primary/80">#{data.order}</span>
+    <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+    <span class="uppercase tracking-wide text-[10px]">{data.level}</span>
+  </div>
+  <h4 class="relative text-lg font-semibold text-white group-hover:text-brand-light transition">{data.title}</h4>
+  <p class="relative text-sm text-slate-300 mt-2 line-clamp-3">{data.description}</p>
+</a>
